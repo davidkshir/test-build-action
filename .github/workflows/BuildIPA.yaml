@@ -1,0 +1,125 @@
+name: Build IPA
+
+on:
+  workflow_dispatch: 
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          
+      - name: Download Godot
+        shell: bash
+        run: | 
+            echo "Downloading Godot"
+            
+            curl -fL -o godot.zip "https://github.com/godotengine/godot/releases/download/4.7.2-stable/Godot_v4.7.2-stable_macos.universal.zip"
+            
+            echo "Godot successfully downloaded"
+
+      - name: Extract Godot
+        shell: bash
+        run: |
+          echo "Extracting Godot"
+          
+          unzip godot.zip
+          
+          echo "Godot successfully extracted"
+
+      - name: Configure Godot executable
+        shell: bash
+        run: |
+          echo "Configuring Godot executable"
+          
+          GODOT_PATH="$PWD/Godot.app/Contents/MacOS/Godot"
+          test -f "$GODOT_PATH"
+          echo "GODOT=$GODOT_PATH" >> "$GITHUB_ENV"
+          
+          echo "Godot executable configured"
+
+      - name: Download Godot Export Templates
+        shell: bash
+        run: |
+          echo "Downloading Godot export templates"
+          
+          curl -fL -o templates.tpz "https://github.com/godotengine/godot/releases/download/4.7.2-stable/Godot_v4.7.2-stable_export_templates.tpz"
+          
+          echo "Export templates successfully downloaded"
+
+      - name: Extract Godot Export Templates
+        shell: bash
+        run: |
+          echo "Extracting export templates"
+          
+          unzip templates.tpz -d godot_templates
+          
+          echo "Export templates successfully extracted"  
+
+      - name: Install Godot Export Templates
+        shell: bash
+        run: |
+          echo "Installing Godot export templates"
+          
+          TEMPLATE_DIR="$HOME/Library/Application Support/Godot/export_templates/4.7.2.stable"
+          mkdir -p "$TEMPLATE_DIR"
+          mv godot_templates/templates/* "$TEMPLATE_DIR/"
+
+          echo "Export templates successfully installed"
+
+      - name: Import Godot Project
+        shell: bash
+        run: |
+          echo "Importing Godot project"
+          
+          "$GODOT" --headless --path . --editor --import --quit
+          
+          echo "Godot project successfully imported"
+
+      - name: Export iOS Project
+        shell: bash
+        run: |
+          echo "Exporting Godot project for iOS"
+          
+          mkdir -p build
+          "$GODOT" --headless --path . --export-release "iOS" build/RetroPong3D.zip
+
+          echo "iOS project successfully exported"
+
+      - name: Build iOS Application
+        shell: bash
+        run: |
+          echo "Building iOS application"
+
+          xcodebuild \
+            -project build/RetroPong3D.xcodeproj \
+            -scheme RetroPong3D \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO
+
+          echo "iOS application successfully built"
+
+      - name: Package IPA
+        shell: bash
+        run: |
+          echo "Packaging iOS application"
+
+          mkdir -p build/Payload
+          cp -R build/DerivedData/Build/Products/Release-iphoneos/RetroPong3D.app build/Payload/
+          cd build
+          zip -qry RetroPong3D-unsigned.ipa Payload
+
+          echo "IPA successfully packaged"
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: RetroPong3D-iOS
+          path: build/RetroPong3D-unsigned.ipa
+          if-no-files-found: error
