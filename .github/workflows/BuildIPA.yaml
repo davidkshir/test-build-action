@@ -75,7 +75,7 @@ jobs:
         run: |
           echo "Importing Godot project"
           
-          "$GODOT" --headless --path . --editor --import --quit
+          "$GODOT" --headless --rendering-method gl_compatibility --path . --editor --import --quit
           
           echo "Godot project successfully imported"
 
