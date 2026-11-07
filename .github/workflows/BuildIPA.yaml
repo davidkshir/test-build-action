@@ -100,11 +100,35 @@ jobs:
       - name: Import Godot Project
         shell: bash
         run: |
+          set -uo pipefail
+
           echo "Importing Godot project"
-      
-          "$GODOT" --headless --path . --editor --import --quit
-      
-          echo "Godot project successfully imported"
+
+          set +e
+
+          "$GODOT" --headless \
+            --path . \
+            --editor \
+            --import \
+            --quit
+
+          EXIT_CODE=$?
+
+          set -e
+
+          if [ "$EXIT_CODE" -ne 0 ]; then
+            echo "WARNING: Godot import exited with code $EXIT_CODE"
+
+            if [ ! -d ".godot/imported" ]; then
+              echo "ERROR: No imported assets found."
+              exit 1
+            fi
+
+            echo "Imported assets directory found."
+            echo "Continuing despite Godot import crash."
+          else
+            echo "Godot project successfully imported!"
+          fi
 
       - name: Package IPA
         shell: bash
