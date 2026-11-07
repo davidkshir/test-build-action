@@ -109,10 +109,7 @@ jobs:
             -type f \
             \( -name "*Godot*.ips" -o -name "*Godot*.crash" \) \
             -print || true
-
-      - name: Export iOS Project
-        # Your existing export commands...
-
+            
       - name: Export iOS Project
         shell: bash
         run: |
