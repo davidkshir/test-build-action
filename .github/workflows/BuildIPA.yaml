@@ -70,14 +70,48 @@ jobs:
 
           echo "Export templates successfully installed"
 
-      - name: Import Godot Project
+      # - name: Import Godot Project
+      #   shell: bash
+      #   run: |
+      #     echo "Importing Godot project"
+          
+      #     "$GODOT" --headless --path . --editor --import --quit
+          
+      #     echo "Godot project successfully imported"
+
+
+      # OLD IMPORT STEP (temporarily disabled)
+      # - name: Import Godot Project
+      #   shell: bash
+      #   run: |
+      #     "$GODOT" --headless --path . --editor --import --quit
+
+      - name: Debug Godot Import
         shell: bash
         run: |
-          echo "Importing Godot project"
-          
-          "$GODOT" --headless --rendering-method gl_compatibility --path . --editor --import --quit
-          
-          echo "Godot project successfully imported"
+          echo "Starting Godot under LLDB"
+
+          lldb --batch \
+            -o run \
+            -o "thread backtrace all" \
+            -o "register read" \
+            -- "$GODOT" --headless --rendering-method gl_compatibility --path . --editor --import --quit
+
+      - name: Collect macOS Crash Reports
+        if: always()
+        shell: bash
+        run: |
+          echo "Checking macOS crash reports"
+
+          ls -lah "$HOME/Library/Logs/DiagnosticReports/" || true
+
+          find "$HOME/Library/Logs/DiagnosticReports/" \
+            -type f \
+            \( -name "*Godot*.ips" -o -name "*Godot*.crash" \) \
+            -print || true
+
+      - name: Export iOS Project
+        # Your existing export commands...
 
       - name: Export iOS Project
         shell: bash
