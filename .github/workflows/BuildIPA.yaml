@@ -130,6 +130,38 @@ jobs:
             echo "Godot project successfully imported!"
           fi
 
+      - name: Export iOS Xcode project
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p build
+
+          "$GODOT" --headless --path . \
+            --export-release "iOS" \
+            build/RetroPong3D.zip
+
+          test -d build/RetroPong3D.xcodeproj
+          echo "Xcode project generated!"
+
+      - name: Compile iOS app
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          xcodebuild \
+            -project build/RetroPong3D.xcodeproj \
+            -scheme RetroPong3D \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath "$PWD/build/DerivedData" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            build
+
+          echo "iOS app compiled successfully!"
+
       - name: Package IPA
         shell: bash
         run: |
