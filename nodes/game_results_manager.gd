@@ -1,6 +1,8 @@
 class_name GameResultsManager
 extends Node
 
+signal results_updated
+
 var _results: Array[GameRecord] = []
 
 
@@ -13,8 +15,19 @@ func append_record(record_data: Dictionary) -> void:
 	record.winner_id = record_data.get("winner_id")
 
 	_results.append(record)
+	results_updated.emit()
 
 
 @rpc("authority", "call_local", "reliable")
 func clear() -> void:
 	_results.clear()
+	results_updated.emit()
+
+
+func get_recent_results() -> Array[GameRecord]:
+	var recent: Array[GameRecord] = []
+
+	for i in range(_results.size() - 1, max(-1, _results.size() - 4), -1):
+		recent.append(_results[i])
+
+	return recent

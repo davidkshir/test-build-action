@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bimefnrwovkdt"]
+[gd_scene format=3 uid="uid://byd5h8w3730mm"]
 
 [ext_resource type="Script" uid="uid://d3r0vdhmr4u63" path="res://nodes/input.gd" id="1_m8xs6"]
 [ext_resource type="PackedScene" uid="uid://be0oavmxlx2em" path="res://addons/pocketar/ar_view.tscn" id="2_y4jw2"]

@@ -1,8 +1,39 @@
 [gd_scene format=3 uid="uid://16lil2blm7h7"]
 
 [ext_resource type="PackedScene" uid="uid://cads8xbmmbnom" path="res://nodes/battlefield.tscn" id="1_yftba"]
-[ext_resource type="PackedScene" uid="uid://tbswgqcxr5k8" path="res://nodes/realm_spawner.tscn" id="3_d4cga"]
+[ext_resource type="PackedScene" uid="uid://byh64l7ovxsdy" path="res://scenes/LobbyUI.tscn" id="3_d4cga"]
 [ext_resource type="Script" uid="uid://dk52har5o8pjn" path="res://scenes/pivot.gd" id="3_g76d4"]
+[ext_resource type="FontFile" uid="uid://ddexdukijnwvp" path="res://addons/font/IBMPlexMono-Medium.ttf" id="4_d4cga"]
+[ext_resource type="Script" uid="uid://devhsmfys4aj4" path="res://scenes/center_container.gd" id="4_u8tpf"]
+[ext_resource type="Script" uid="uid://dn8puhulmyd0f" path="res://scenes/control.gd" id="5_qyrwf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyrwf"]
+bg_color = Color(0.03137255, 0.078431375, 0.14901961, 0.8)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 1, 1, 0.4)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0w2e0"]
+bg_color = Color(0.03137255, 0.078431375, 0.14901961, 0.8)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 1, 1, 0.4)
+shadow_size = 6
 
 [node name="LobbyScene" type="Node3D" unique_id=1144864260]
 
@@ -16,4 +47,87 @@ script = ExtResource("3_g76d4")
 transform = Transform3D(-4.371139e-08, -0.42261827, 0.90630776, 0, 0.90630776, 0.42261827, -1, 1.8473232e-08, -3.961597e-08, 3, 2, 0)
 current = true
 
-[node name="RealmSpawner" parent="." unique_id=632452808 instance=ExtResource("3_d4cga")]
+[node name="Control" parent="." unique_id=534611682 instance=ExtResource("3_d4cga")]
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control" unique_id=306681729]
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/CanvasLayer" unique_id=301886096]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_u8tpf")
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/CanvasLayer/CenterContainer" unique_id=372085973]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qyrwf")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/CanvasLayer/CenterContainer/PanelContainer" unique_id=1762926111]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CanvasLayer/CenterContainer/PanelContainer/MarginContainer" unique_id=1480986615]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="Control/CanvasLayer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=443819303]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_d4cga")
+theme_override_font_sizes/font_size = 32
+text = "Pong For Two"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Control/CanvasLayer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=277541823]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_d4cga")
+text = "Start"
+
+[node name="Button2" type="Button" parent="Control/CanvasLayer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=695618038]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_d4cga")
+text = "Quit"
+
+[node name="Control" type="Control" parent="Control/CanvasLayer" unique_id=769810537]
+custom_minimum_size = Vector2(280, 300)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 295.0
+offset_bottom = 315.0
+script = ExtResource("5_qyrwf")
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/CanvasLayer/Control" unique_id=1753324225]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0w2e0")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/CanvasLayer/Control/PanelContainer" unique_id=1001451784]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CanvasLayer/Control/PanelContainer/MarginContainer" unique_id=1108252110]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Control/CanvasLayer/Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=1882020038]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_d4cga")
+theme_override_font_sizes/font_size = 24
+text = "Recent Games"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CanvasLayer/Control/PanelContainer/MarginContainer/VBoxContainer" unique_id=779805754]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[connection signal="pressed" from="Control/CanvasLayer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Button2" to="Control/CanvasLayer/CenterContainer" method="_on_quit_pressed"]

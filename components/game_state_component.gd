@@ -10,8 +10,6 @@ enum GameState {
 
 	STATE_PRE_ROUND,
 
-	STATE_ROUND,
-
 	STATE_POST_ROUND,
 
 	STATE_ENDED,

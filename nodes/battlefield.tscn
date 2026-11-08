@@ -23,13 +23,15 @@ environment = SubResource("Environment_vnuii")
 [node name="Paddle1" parent="." unique_id=9845050 instance=ExtResource("2_2qtdm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.95)
 
-[node name="BackplaneWall1" parent="." unique_id=560675470 node_paths=PackedStringArray("target_node") instance=ExtResource("1_2qtdm")]
+[node name="BackplaneWall1" parent="." unique_id=560675470 node_paths=PackedStringArray("opposing_wall", "target_node") instance=ExtResource("1_2qtdm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2.015)
+opposing_wall = NodePath("../BackplaneWall2")
 target_node = NodePath("../Paddle1")
 
 [node name="Paddle2" parent="." unique_id=49443508 instance=ExtResource("2_2qtdm")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0022138357, 1, 1.95)
 
-[node name="BackplaneWall2" parent="." unique_id=2055554970 node_paths=PackedStringArray("target_node") instance=ExtResource("1_2qtdm")]
+[node name="BackplaneWall2" parent="." unique_id=2055554970 node_paths=PackedStringArray("opposing_wall", "target_node") instance=ExtResource("1_2qtdm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.015)
+opposing_wall = NodePath("../BackplaneWall1")
 target_node = NodePath("../Paddle2")
