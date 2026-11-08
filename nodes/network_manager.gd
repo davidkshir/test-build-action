@@ -2,7 +2,7 @@ class_name NetworkManager
 extends Node
 
 # CHANGE TO SERVER'S TAILSCALE IP BEFORE USE
-const SERVER_IP_ADDRESS: String = "100.118.183.52"
+const SERVER_IP_ADDRESS: String = "100.105.71.113"
 
 const SERVER_PORT: int = 27015
 const MAX_PLAYERS: int = 2
