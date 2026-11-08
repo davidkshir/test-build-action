@@ -2,6 +2,10 @@
 class_name BackplaneWall
 extends Node3D
 
+signal ball_hit(wall: BackplaneWall)
+
+@export var opposing_wall: BackplaneWall
+
 @export var target_node: Node3D
 
 @onready var mesh_instance_3d: MeshInstance3D = %MeshInstance3D
@@ -44,3 +48,32 @@ func _process(_delta: float) -> void:
 	)
 
 	shader_material.set_shader_parameter("mask_origin", closest_point)
+
+
+func _on_collision_area_body_entered(body: Node3D) -> void:
+	if not multiplayer.is_server():
+		return
+
+	# Filter for ball (can change for more specific condition when ball is created)
+	if body is not RigidBody3D:
+		return
+
+	if opposing_wall == null:
+		push_warning("Opposing wall is not assigned.")
+		return
+
+	var losing_player: Player = player
+	var scoring_player: Player = opposing_wall.player
+
+	if losing_player == null or scoring_player == null:
+		print("Cannot score: players are not assigned.")
+		return
+
+	if losing_player.health == null or scoring_player.score == null:
+		push_warning("Player components are missing.")
+		return
+
+	losing_player.health.health -= 1
+	scoring_player.score.score += 1
+
+	ball_hit.emit(self)

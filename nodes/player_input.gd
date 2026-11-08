@@ -1,50 +1,72 @@
 class_name PlayerInput
 extends Node
 
-const SERVER_ID: int = 1
+@export var motion_scale: float = 1.0
 
-var ar_position: Vector2 = Vector2.ZERO
+var current_anchor: ARAnchorTracker = null
 
-var backplane_wall: BackplaneWall
+var initial_anchor_transform: Transform3D = Transform3D.IDENTITY
 
-var paddle: Paddle
+var is_calibrated: bool = false
 
-@onready var ar_view = $ARView
-
-@onready var battlefield: Battlefield = RootScene.instance.content_scene.get_child(0).get_node(
-	"Battlefield"
-)
+@onready var ar_view: ARView = $ARView
 
 @onready var player: Player = get_parent()
 
 
 func _ready() -> void:
+	ar_view.virtual_scene.render_target_update_mode = SubViewport.UPDATE_DISABLED
+
 	if multiplayer.is_server():
 		return
 
 	if OS.has_feature("ios"):
 		ar_view.backend = ARView.Backend.ARKIT
-	else:
+	elif OS.has_feature("android"):
 		ar_view.backend = ARView.Backend.ARCORE
 
-	backplane_wall = battlefield.backplane_wall_2 \
-			if battlefield.backplane_wall_1.player else battlefield.backplane_wall_1
-
-	paddle = battlefield.paddle_2 \
-			if battlefield.paddle_1.player else battlefield.paddle_1
-
-	backplane_wall.player = player
-	paddle.player = player
+	ar_view.packet_applied.connect(_on_first_packet, CONNECT_ONE_SHOT)
 
 
-func _physics_process(_delta: float) -> void:
-	if multiplayer.is_server():
+func _process(_delta: float) -> void:
+	if multiplayer.is_server() or not is_calibrated:
 		return
 
-	if ar_view.applied_packet == null:
+	var anchor_transform = initial_anchor_transform
+
+	if current_anchor and current_anchor.has_tracking_data:
+		var xr_pose: XRPose = current_anchor.get_pose("default")
+
+		if xr_pose:
+			anchor_transform = xr_pose.transform
+
+	var camera_position = ar_view.camera.global_position
+	var local_displacement = anchor_transform.affine_inverse() * camera_position
+
+	var tracking_delta = Vector2(local_displacement.x, local_displacement.y) * motion_scale
+
+	send_input_delta.rpc_id(1, tracking_delta)
+
+
+func calibrate() -> void:
+	var camera_transform: Transform3D = ar_view.camera.global_transform
+
+	initial_anchor_transform = camera_transform
+
+	if current_anchor:
+		ar_view.remove_anchor(current_anchor)
+
+	current_anchor = ar_view.create_anchor(camera_transform)
+	is_calibrated = true
+
+
+@rpc("any_peer", "call_local", "unreliable")
+func send_input_delta(tracking_delta: Vector2) -> void:
+	if not multiplayer.is_server():
 		return
 
+	player.tracking_delta.tracking_delta = tracking_delta
 
-@rpc("any_peer", "unreliable")
-func _set_coordinates(position: Vector2) -> void:
-	paddle.ar_position = position
+
+func _on_first_packet(_packet: ARFramePacket) -> void:
+	calibrate()

@@ -22,3 +22,7 @@ enum GameState {
 		return _value
 	set(value):
 		_value = value
+
+
+func _init(initial_value: GameState = GameState.STATE_NONE) -> void:
+	super(initial_value)

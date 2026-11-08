@@ -2,60 +2,58 @@
 
 [ext_resource type="Material" uid="uid://dfpx1kaxw005g" path="res://textures/grid_backplane_texture.tres" id="1_18201"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kh0q7"]
+friction = 0.0
+bounce = 1.0
+
 [sub_resource type="BoxMesh" id="BoxMesh_kh0q7"]
+size = Vector3(2, 0.03, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pe5hr"]
 size = Vector3(2, 0.03, 4)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4lefe"]
 size = Vector3(0.03, 2, 4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_pe5hr"]
-size = Vector3(0.03, 2, 4)
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kh0q7"]
-friction = 0.0
-bounce = 1.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_pe5hr"]
-size = Vector3(2, 0.03, 4)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_dksfx"]
 size = Vector3(0.03, 2, 4)
 
-[node name="BarrierWalls" type="Node3D" unique_id=1701708914]
+[sub_resource type="BoxMesh" id="BoxMesh_pe5hr"]
+size = Vector3(0.03, 2, 4)
+
+[node name="BarrierWalls" type="StaticBody3D" unique_id=1445083270]
+physics_material_override = SubResource("PhysicsMaterial_kh0q7")
 
 [node name="RoofMeshInstance3D" type="MeshInstance3D" parent="." unique_id=824121701]
 material_override = ExtResource("1_18201")
 mesh = SubResource("BoxMesh_kh0q7")
+
+[node name="RoofCollsionShape3D" type="CollisionShape3D" parent="." unique_id=334444477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_pe5hr")
 
 [node name="FloorMeshInstance3D" type="MeshInstance3D" parent="." unique_id=1284356475]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 material_override = ExtResource("1_18201")
 mesh = SubResource("BoxMesh_kh0q7")
 
+[node name="FloorCollsionShape3D" type="CollisionShape3D" parent="." unique_id=1220085233]
+shape = SubResource("BoxShape3D_pe5hr")
+
 [node name="RightWallMeshInstance3D" type="MeshInstance3D" parent="." unique_id=491132609]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
 material_override = ExtResource("1_18201")
 mesh = SubResource("BoxMesh_4lefe")
+
+[node name="RightWallCollsionShape3D" type="CollisionShape3D" parent="." unique_id=1089431861]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+shape = SubResource("BoxShape3D_dksfx")
 
 [node name="LeftWallMeshInstance3D" type="MeshInstance3D" parent="." unique_id=2144608881]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
 material_override = ExtResource("1_18201")
 mesh = SubResource("BoxMesh_pe5hr")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1445083270]
-physics_material_override = SubResource("PhysicsMaterial_kh0q7")
-
-[node name="RoofCollsionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=334444477]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-shape = SubResource("BoxShape3D_pe5hr")
-
-[node name="FloorCollsionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1220085233]
-shape = SubResource("BoxShape3D_pe5hr")
-
-[node name="RightWallCollsionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1089431861]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
-shape = SubResource("BoxShape3D_dksfx")
-
-[node name="LeftWallCollsionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=73189003]
+[node name="LeftWallCollsionShape3D" type="CollisionShape3D" parent="." unique_id=73189003]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
 shape = SubResource("BoxShape3D_dksfx")

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://tbswgqcxr5k8"]
+
+[ext_resource type="Script" uid="uid://bpwtyux8ojbk3" path="res://nodes/realm_spawner.gd" id="1_2o3g5"]
+
+[node name="RealmSpawner" type="Node" unique_id=632452808]
+script = ExtResource("1_2o3g5")

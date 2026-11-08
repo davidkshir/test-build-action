@@ -1,5 +1,9 @@
 class_name Paddle
-extends Node3D
+extends AnimatableBody3D
+
+const WALL_HALF_EXTENTS: Vector2 = Vector2(1.0, 1.0) # 2m x 2m backplane wall centered at half
+
+var _player_id: int = -1
 
 var _player: Player = null
 
@@ -14,20 +18,44 @@ var player: Player:
 
 var ar_position: Vector2
 
-@onready var animatable_body_3d: AnimatableBody3D = %AnimatableBody3D
+@onready var _initial_basis: Basis = transform.basis
+
+@onready var _initial_position: Vector3 = position
 
 @onready var camera_3d: Camera3D = %Camera3D
 
 
+@rpc("authority", "call_local", "reliable")
+func _sync_player_id(id: int) -> void:
+	camera_3d.current = id == multiplayer.get_unique_id()
+
+
 func _player_changed(_old_player: Player, new_player: Player) -> void:
-	if multiplayer.is_server():
+	if not multiplayer.is_server():
 		return
 
-	var id = multiplayer.get_unique_id()
-	var player = RootScene.instance.lobby_manager.get_player_from_id(id)
-
-	camera_3d.current = player == new_player
+	_sync_player_id.rpc(new_player.id)
 
 
 func _physics_process(_delta: float) -> void:
-	pass # do movement w/ `animatable_body_3d`
+	if not multiplayer.is_server() or player == null:
+		return
+
+	var tracking_delta = player.tracking_delta.tracking_delta
+
+	var local_x = clampf(
+		tracking_delta.x * WALL_HALF_EXTENTS.x,
+		-WALL_HALF_EXTENTS.x,
+		WALL_HALF_EXTENTS.x,
+	) * 5
+
+	var local_y = clampf(
+		tracking_delta.y * WALL_HALF_EXTENTS.y,
+		-WALL_HALF_EXTENTS.y,
+		WALL_HALF_EXTENTS.y,
+	) * 5
+
+	var local_right: Vector3 = _initial_basis.x.normalized()
+	var local_up: Vector3 = _initial_basis.y.normalized()
+
+	position = _initial_position - (local_right * local_x) + (local_up * local_y)

@@ -3,7 +3,7 @@ extends Node
 
 signal changed(old_value: Variant, new_value: Variant)
 
-var _initial_value: Variant = null
+var _initial_value: Variant
 
 var _value: Variant:
 	set(new_value):
@@ -14,8 +14,9 @@ var _value: Variant:
 			changed.emit(old_value, new_value)
 
 
-func _init() -> void:
-	_initial_value = _value
+func _init(initial_value: Variant = null) -> void:
+	_initial_value = initial_value
+	_value = initial_value
 
 
 func reset() -> void:

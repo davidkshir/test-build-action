@@ -3,7 +3,7 @@ extends ObservableComponent
 
 @export var max_round: int = -1
 
-@export() var round: int = 1:
+@export() var round: int:
 	get:
 		return _value
 	set(value):
@@ -16,3 +16,7 @@ extends ObservableComponent
 		assert(value < 1, "bad mutation to 'RoundComponent.round' (value '%d' is less than '1')")
 
 		_value = value
+
+
+func _init(initial_value: int = 1) -> void:
+	super(initial_value)

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b7t02ejkpjcja"]
 
 [ext_resource type="Script" uid="uid://c4ejdmknn08ae" path="res://nodes/backplane_wall.gd" id="1_80kpn"]
-[ext_resource type="Shader" uid="uid://cuwbg7do710vr" path="res://nodes/backplane_grid.gdshader" id="2_56doc"]
+[ext_resource type="Shader" uid="uid://cuwbg7do710vr" path="res://shaders/backplane_grid.gdshader" id="2_56doc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ir3qr"]
 render_priority = 0
@@ -9,7 +9,7 @@ shader = ExtResource("2_56doc")
 shader_parameter/grid_size = 0.05
 shader_parameter/line_color = Color(0.212, 0.345, 0.537, 1)
 shader_parameter/line_thickness = 0.05
-shader_parameter/mask_origin = Vector3(0, 0, 0)
+shader_parameter/mask_origin = Vector3(-0.0022138357, 0, -0.015)
 shader_parameter/mask_radius = 1.0
 shader_parameter/mask_feather = 0.5
 
@@ -18,6 +18,9 @@ size = Vector3(2, 2, 0.03)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b3yr8"]
 size = Vector3(2, 2, 0.03)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kh0q7"]
+size = Vector3(2, 2, 0.08)
 
 [node name="BackplaneWall" type="Node3D" unique_id=560675470]
 script = ExtResource("1_80kpn")
@@ -32,3 +35,10 @@ unique_name_in_owner = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2036668991]
 shape = SubResource("BoxShape3D_b3yr8")
+
+[node name="Collision Area" type="Area3D" parent="." unique_id=564359629]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collision Area" unique_id=1915773679]
+shape = SubResource("BoxShape3D_kh0q7")
+
+[connection signal="body_entered" from="Collision Area" to="." method="_on_collision_area_body_entered"]

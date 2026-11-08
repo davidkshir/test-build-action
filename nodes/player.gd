@@ -10,3 +10,5 @@ var id: int
 @onready var is_ready: IsReadyComponent = %IsReady
 
 @onready var score: ScoreComponent = %Score
+
+@onready var tracking_delta: TrackingDeltaComponent = %TrackingDelta

@@ -6,3 +6,7 @@ extends ObservableComponent
 		return _value
 	set(value):
 		_value = value
+
+
+func _init(initial_value: bool = false) -> void:
+	super(initial_value)

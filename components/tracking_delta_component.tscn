@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://eiobu70jvmj"]
+
+[ext_resource type="Script" uid="uid://ban110l2817y7" path="res://components/tracking_delta_component.gd" id="1_vonhq"]
+
+[node name="TrackingDeltaComponent" type="Node" unique_id=468225487]
+script = ExtResource("1_vonhq")

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dlde46ugnd673" path="res://components/score_component.tscn" id="3_hqdnm"]
 [ext_resource type="PackedScene" uid="uid://bxwfr40nlw6d5" path="res://components/is_ready_component.tscn" id="4_hqdnm"]
 [ext_resource type="PackedScene" uid="uid://bimefnrwovkdt" path="res://nodes/player_input.tscn" id="5_7lbay"]
+[ext_resource type="PackedScene" uid="uid://eiobu70jvmj" path="res://components/tracking_delta_component.tscn" id="6_2wrp4"]
 
 [node name="Player" type="Node" unique_id=1569561123]
 script = ExtResource("1_u63mc")
@@ -20,4 +21,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="Score" parent="." unique_id=468225487 instance=ExtResource("3_hqdnm")]
+unique_name_in_owner = true
+
+[node name="TrackingDelta" parent="." unique_id=1602047250 instance=ExtResource("6_2wrp4")]
 unique_name_in_owner = true
