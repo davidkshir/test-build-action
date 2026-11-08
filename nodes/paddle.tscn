@@ -9,6 +9,9 @@ size = Vector3(0.5, 0.5, 0.1)
 size = Vector3(0.5, 0.5, 0.1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ccmf2"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Paddle" type="Node3D" unique_id=9845050]
 script = ExtResource("1_c6p2f")
@@ -28,5 +31,5 @@ script = ExtResource("1_c6p2f")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" unique_id=401505611]
 shape = SubResource("BoxShape3D_0w2e0")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=660027852]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=630210369]
 replication_config = SubResource("SceneReplicationConfig_ccmf2")

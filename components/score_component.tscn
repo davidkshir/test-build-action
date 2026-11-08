@@ -2,5 +2,13 @@
 
 [ext_resource type="Script" uid="uid://cqvqo8fd2jdu7" path="res://components/score_component.gd" id="1_wl041"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wl041"]
+properties/0/path = NodePath(".:score")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="ScoreComponent" type="Node" unique_id=468225487]
 script = ExtResource("1_wl041")
+
+[node name="ScoreMultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1410181090]
+replication_config = SubResource("SceneReplicationConfig_wl041")

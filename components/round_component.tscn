@@ -1,6 +1,17 @@
-[gd_scene format=3 uid="uid://bdsc4s68pmpac"]
+[gd_scene format=3 uid="uid://sb87rj82hpgq"]
 
 [ext_resource type="Script" uid="uid://bbytqrju416nh" path="res://components/round_component.gd" id="1_bjoij"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bjoij"]
+properties/0/path = NodePath(".:round")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:max_round")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="RoundComponent" type="Node" unique_id=94217729]
 script = ExtResource("1_bjoij")
+
+[node name="RoundMultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1065542718]
+replication_config = SubResource("SceneReplicationConfig_bjoij")

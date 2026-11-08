@@ -1,7 +1,16 @@
 [gd_scene format=3 uid="uid://16lil2blm7h7"]
 
 [ext_resource type="PackedScene" uid="uid://cads8xbmmbnom" path="res://nodes/battlefield.tscn" id="1_yftba"]
+[ext_resource type="Script" uid="uid://dk52har5o8pjn" path="res://scenes/pivot.gd" id="3_g76d4"]
 
 [node name="LobbyScene" type="Node3D" unique_id=1144864260]
 
 [node name="Battlefield" parent="." unique_id=1339524449 instance=ExtResource("1_yftba")]
+
+[node name="Pivot" type="Node3D" parent="." unique_id=28194592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("3_g76d4")
+
+[node name="Orbit Cam" type="Camera3D" parent="Pivot" unique_id=1267677185]
+transform = Transform3D(-4.371139e-08, -0.42261827, 0.90630776, 0, 0.90630776, 0.42261827, -1, 1.8473232e-08, -3.961597e-08, 3, 2, 0)
+current = true

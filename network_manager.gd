@@ -1,7 +1,8 @@
 extends Node
 
 # CHANGE TO SERVER'S TAILSCALE IP BEFORE USE
-const SERVER_IP_ADDRESS: String = "100.118.183.52"
+const SERVER_IP_ADDRESS: String = "100.118.183.52
+"
 
 const SERVER_PORT: int = 27015
 const MAX_PLAYERS: int = 2
@@ -19,8 +20,6 @@ func _ready() -> void:
 			push_error("Client failed to start " + error_string(result))
 			return
 
-		RootScene.instance.transition_to("res://scenes/battlefield_scene.tscn")
-
 		multiplayer.multiplayer_peer = peer
 
 	# Start server
@@ -33,23 +32,20 @@ func _ready() -> void:
 			push_error("Server failed to start " + error_string(result))
 			return
 
-			RootScene.instance.transition_to("res://scenes/battlefield_scene.tscn")
-
-		#RootScene.instance.transition_to("res://scenes/lobby_scene.tscn")
+		RootScene.instance.transition_to("res://scenes/lobby_scene.tscn")
 
 		# Creates signal for clients connecting
 		multiplayer.peer_connected.connect(_on_peer_connected)
-
 		multiplayer.peer_disconnected.disconnect(_on_peer_disconnected)
 
 		multiplayer.multiplayer_peer = peer
 
 
 func _on_peer_connected(id: int) -> void:
-	var player = Player.new(id)
-	RootScene.instance.lobby_manager.add_player(player)
+	RootScene.instance.lobby_manager.add_player(id)
 	print("Client connected: ", id)
 
 
-func _on_peer_disconnected(_id: int) -> void:
-	pass
+func _on_peer_disconnected(id: int) -> void:
+	RootScene.instance.lobby_manager.remove_player(id)
+	print("Client disconnect: ", id)

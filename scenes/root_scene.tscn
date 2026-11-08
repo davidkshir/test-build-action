@@ -17,8 +17,8 @@ unique_name_in_owner = true
 [node name="NetworkManager" parent="." unique_id=1972815278 instance=ExtResource("3_sfakk")]
 unique_name_in_owner = true
 
-[node name="ContentSceneSpawner" type="MultiplayerSpawner" parent="." unique_id=1561852430]
-_spawnable_scenes = PackedStringArray("uid://16lil2blm7h7", "uid://by2d0a3re60hm")
+[node name="ContentMultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1718194899]
+_spawnable_scenes = PackedStringArray("uid://by2d0a3re60hm", "uid://16lil2blm7h7")
 spawn_path = NodePath("../ContentScene")
 
 [node name="ContentScene" type="Node" parent="." unique_id=167327846]

@@ -1,6 +1,17 @@
 [gd_scene format=3 uid="uid://b7t02ejkpjcja"]
 
 [ext_resource type="Script" uid="uid://c4ejdmknn08ae" path="res://nodes/backplane_wall.gd" id="1_80kpn"]
+[ext_resource type="Shader" uid="uid://cuwbg7do710vr" path="res://nodes/backplane_grid.gdshader" id="2_56doc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ir3qr"]
+render_priority = 0
+shader = ExtResource("2_56doc")
+shader_parameter/grid_size = 0.05
+shader_parameter/line_color = Color(0.212, 0.345, 0.537, 1)
+shader_parameter/line_thickness = 0.05
+shader_parameter/mask_origin = Vector3(0, 0, 0)
+shader_parameter/mask_radius = 1.0
+shader_parameter/mask_feather = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_3dkeh"]
 size = Vector3(2, 2, 0.03)
@@ -12,6 +23,8 @@ size = Vector3(2, 2, 0.03)
 script = ExtResource("1_80kpn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=596451845]
+unique_name_in_owner = true
+material_override = SubResource("ShaderMaterial_ir3qr")
 mesh = SubResource("BoxMesh_3dkeh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=719001572]

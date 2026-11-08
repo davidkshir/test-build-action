@@ -5,6 +5,6 @@
 [node name="LobbyManager" type="Node" unique_id=55853016]
 script = ExtResource("1_4krsm")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=899572554]
+[node name="PlayerMultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=303736259]
 _spawnable_scenes = PackedStringArray("uid://dxybyeouacevo")
 spawn_path = NodePath("..")

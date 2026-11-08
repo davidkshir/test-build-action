@@ -2,5 +2,10 @@
 
 [ext_resource type="Script" uid="uid://b47jkxaydsp3" path="res://components/is_ready_component.gd" id="1_8xc02"]
 
-[node name="ReadyComponent" type="Node" unique_id=985823665]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8xc02"]
+
+[node name="IsReadyComponent" type="Node" unique_id=985823665]
 script = ExtResource("1_8xc02")
+
+[node name="IsReadyMultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=472216699]
+replication_config = SubResource("SceneReplicationConfig_8xc02")

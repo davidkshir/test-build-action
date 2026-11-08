@@ -2,5 +2,13 @@
 
 [ext_resource type="Script" uid="uid://cdurvku2wlukq" path="res://components/game_state_component.gd" id="1_mlj58"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mlj58"]
+properties/0/path = NodePath(".:game_state")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="GameStateComponent" type="Node" unique_id=94217729]
 script = ExtResource("1_mlj58")
+
+[node name="GameStateMultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=384876770]
+replication_config = SubResource("SceneReplicationConfig_mlj58")

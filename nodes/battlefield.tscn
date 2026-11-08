@@ -1,21 +1,35 @@
 [gd_scene format=3 uid="uid://cads8xbmmbnom"]
 
 [ext_resource type="PackedScene" uid="uid://b7t02ejkpjcja" path="res://nodes/backplane_wall.tscn" id="1_2qtdm"]
+[ext_resource type="Script" uid="uid://bwccubv3gw3wo" path="res://nodes/battlefield.gd" id="1_ir3qr"]
 [ext_resource type="PackedScene" uid="uid://churypx3uhfns" path="res://nodes/barrier_walls.tscn" id="1_uiimn"]
 [ext_resource type="PackedScene" uid="uid://c4qgf3rrtvfpe" path="res://nodes/paddle.tscn" id="2_2qtdm"]
 
+[sub_resource type="Environment" id="Environment_vnuii"]
+background_mode = 1
+ambient_light_source = 1
+glow_enabled = true
+glow_intensity = 1.0
+glow_blend_mode = 2
+
 [node name="Battlefield" type="Node3D" unique_id=1339524449]
+script = ExtResource("1_ir3qr")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=732189698]
+environment = SubResource("Environment_vnuii")
 
 [node name="BarrierWalls" parent="." unique_id=1701708914 instance=ExtResource("1_uiimn")]
 
 [node name="Paddle1" parent="." unique_id=9845050 instance=ExtResource("2_2qtdm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.95)
 
-[node name="BackplaneWall1" parent="." unique_id=560675470 instance=ExtResource("1_2qtdm")]
+[node name="BackplaneWall1" parent="." unique_id=560675470 node_paths=PackedStringArray("target_node") instance=ExtResource("1_2qtdm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2.015)
+target_node = NodePath("../Paddle1")
 
 [node name="Paddle2" parent="." unique_id=49443508 instance=ExtResource("2_2qtdm")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, 1.95)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0022138357, 1, 1.95)
 
-[node name="BackplaneWall2" parent="." unique_id=2055554970 instance=ExtResource("1_2qtdm")]
+[node name="BackplaneWall2" parent="." unique_id=2055554970 node_paths=PackedStringArray("target_node") instance=ExtResource("1_2qtdm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.015)
+target_node = NodePath("../Paddle2")

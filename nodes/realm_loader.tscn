@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b70damgq17txv"]
+
+[ext_resource type="Script" path="res://nodes/realm_loader.gd" id="1_se0jo"]
+
+[sub_resource type="PackedScene" id="PackedScene_se0jo"]
+
+[node name="RealmLoader" type="Node" unique_id=1518446039]
+script = ExtResource("1_se0jo")
+client_scene = SubResource("PackedScene_se0jo")

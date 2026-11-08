@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bimefnrwovkdt"]
+
+[ext_resource type="Script" uid="uid://d3r0vdhmr4u63" path="res://nodes/player_input.gd" id="1_m8xs6"]
+[ext_resource type="PackedScene" path="res://addons/pocketar/ar_view.tscn" id="2_y4jw2"]
+
+[node name="Input" type="Node" unique_id=1405639827]
+script = ExtResource("1_m8xs6")
+
+[node name="ARView" parent="." unique_id=1008093009 instance=ExtResource("2_y4jw2")]
+visible = false
