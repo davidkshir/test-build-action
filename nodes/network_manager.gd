@@ -2,7 +2,7 @@ class_name NetworkManager
 extends Node
 
 # CHANGE TO SERVER'S TAILSCALE IP BEFORE USE
-const SERVER_IP_ADDRESS: String = "100.118.183.52"
+const SERVER_IP_ADDRESS: String = "100.91.91.47"
 
 const SERVER_PORT: int = 27015
 const MAX_PLAYERS: int = 2
@@ -20,6 +20,7 @@ func manager_ready() -> void:
 			push_error("Client failed to start " + error_string(result))
 			return
 
+		RootScene.instance.transition_to("res://scenes/battlefield_scene.tscn")
 		multiplayer.multiplayer_peer = peer
 
 	# Start server
@@ -32,7 +33,8 @@ func manager_ready() -> void:
 			push_error("Server failed to start " + error_string(result))
 			return
 
-		RootScene.instance.transition_to("res://scenes/lobby_scene.tscn")
+		#RootScene.instance.transition_to("res://scenes/lobby_scene.tscn")
+		RootScene.instance.transition_to("res://scenes/battlefield_scene.tscn")
 
 		# Creates signal for clients connecting
 		multiplayer.peer_connected.connect(_on_peer_connected)
@@ -43,7 +45,7 @@ func manager_ready() -> void:
 
 func _on_peer_connected(id: int) -> void:
 	RootScene.instance.lobby_manager.add_player(id)
-	print("Player client id '%s' id")
+	print("Player client id '%s' id" % id)
 
 
 func _on_peer_disconnected(id: int) -> void:

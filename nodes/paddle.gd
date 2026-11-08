@@ -30,4 +30,4 @@ func _player_changed(_old_player: Player, new_player: Player) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	pass # do movement w/ `animatable_body_3d`
+	pass

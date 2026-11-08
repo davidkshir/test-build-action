@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c5ih3dv6vjmwu" path="res://nodes/lobby_manager.gd" id="1_4krsm"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5cobi"]
-
 [node name="LobbyManager" type="Node" unique_id=55853016]
 script = ExtResource("1_4krsm")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1603734408]
-replication_config = SubResource("SceneReplicationConfig_5cobi")
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=899572554]
+_spawnable_scenes = PackedStringArray("uid://dxybyeouacevo")
+spawn_path = NodePath("..")

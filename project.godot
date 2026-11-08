@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="retropaddle"
-run/main_scene="uid://cads8xbmmbnom"
+run/main_scene="uid://rke4mrx7yv4j"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 

@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dxybyeouacevo"]
 
 [ext_resource type="Script" uid="uid://oyjq66vwmfr1" path="res://nodes/player.gd" id="1_u63mc"]
-[ext_resource type="PackedScene" path="res://addons/pocketar/ar_view.tscn" id="2_2wrp4"]
+[ext_resource type="PackedScene" uid="uid://be0oavmxlx2em" path="res://addons/pocketar/ar_view.tscn" id="2_2wrp4"]
 [ext_resource type="PackedScene" uid="uid://frs0k4yks3vr" path="res://components/health_component.tscn" id="2_me0cc"]
 [ext_resource type="PackedScene" uid="uid://dlde46ugnd673" path="res://components/score_component.tscn" id="3_hqdnm"]
 [ext_resource type="PackedScene" uid="uid://bxwfr40nlw6d5" path="res://components/is_ready_component.tscn" id="4_hqdnm"]
-[ext_resource type="Script" uid="uid://d3r0vdhmr4u63" path="res://nodes/input.gd" id="6_46y3y"]
+[ext_resource type="PackedScene" uid="uid://bimefnrwovkdt" path="res://nodes/input.tscn" id="5_7lbay"]
 
 [node name="Player" type="Node" unique_id=1569561123]
 script = ExtResource("1_u63mc")
@@ -20,7 +20,10 @@ unique_name_in_owner = true
 [node name="Score" parent="." unique_id=468225487 instance=ExtResource("3_hqdnm")]
 unique_name_in_owner = true
 
-[node name="Input" type="Node" parent="." unique_id=1163386557]
-script = ExtResource("6_46y3y")
+[node name="Input" parent="." unique_id=1534407659 instance=ExtResource("5_7lbay")]
 
-[node name="ARView" parent="Input" unique_id=1008093009 instance=ExtResource("2_2wrp4")]
+[node name="ARView" parent="." unique_id=1008093009 instance=ExtResource("2_2wrp4")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1670956137]
+_spawnable_scenes = PackedStringArray("uid://frs0k4yks3vr", "uid://bxwfr40nlw6d5", "uid://dlde46ugnd673", "uid://bimefnrwovkdt", "uid://be0oavmxlx2em")
+spawn_path = NodePath("..")
