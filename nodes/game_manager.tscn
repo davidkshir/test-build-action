@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bebnnfqhcd4c5"]
+
+[ext_resource type="Script" uid="uid://qfhxo0liylk2" path="res://nodes/game_manager.gd" id="1_1s33q"]
+[ext_resource type="PackedScene" uid="uid://cpu0kty732us2" path="res://components/game_state_component.tscn" id="2_bxhn3"]
+[ext_resource type="PackedScene" uid="uid://bdsc4s68pmpac" path="res://components/round_component.tscn" id="3_o4i5i"]
+
+[node name="GameManager" type="Node" unique_id=2053409803]
+script = ExtResource("1_1s33q")
+
+[node name="GameState" parent="." unique_id=94217729 instance=ExtResource("2_bxhn3")]
+unique_name_in_owner = true
+
+[node name="Round" parent="." unique_id=197529314 instance=ExtResource("3_o4i5i")]
+unique_name_in_owner = true

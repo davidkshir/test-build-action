@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dngasovthuntg"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ooxkd"]
+radius = 0.15
+height = 0.3
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_80nbo"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ldcxq"]
+radius = 0.15
+
+[node name="Ball" type="Node3D" unique_id=1192235307]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1846309544]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=929618626]
+mesh = SubResource("SphereMesh_ooxkd")
+
+[node name="RigidBall3D" type="RigidBody3D" parent="." unique_id=628200670]
+physics_material_override = SubResource("PhysicsMaterial_80nbo")
+gravity_scale = 0.0
+linear_damp_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBall3D" unique_id=593076680]
+shape = SubResource("SphereShape3D_ldcxq")

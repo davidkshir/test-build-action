@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dlbdligy2tsss"]
+
+[ext_resource type="Script" uid="uid://c6416extqssam" path="res://nodes/network_manager.gd" id="1_eik7t"]
+
+[node name="Network Manager" type="Node" unique_id=1972815278]
+script = ExtResource("1_eik7t")

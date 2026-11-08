@@ -1,10 +1,10 @@
 extends Node
 
 # CHANGE TO SERVER'S TAILSCALE IP BEFORE USE
-var SERVER_IP_ADDRESS: String = "100.118.183.52"
+const SERVER_IP_ADDRESS: String = "100.118.183.52"
 
-var SERVER_PORT: int = 27015
-var MAX_PLAYERS: int = 2
+const SERVER_PORT: int = 27015
+const MAX_PLAYERS: int = 2
 
 
 # Called when the node enters the scene tree for the first time.
@@ -19,9 +19,6 @@ func _ready() -> void:
 			push_error("Client failed to start " + error_string(result))
 			return
 
-		# Will be used in future to show lobby when client connects
-		multiplayer.connected_to_server.connect(_on_connected_to_server)
-
 		multiplayer.multiplayer_peer = peer
 
 	# Start server
@@ -34,15 +31,21 @@ func _ready() -> void:
 			push_error("Server failed to start " + error_string(result))
 			return
 
+		RootScene.instance.transition_to("res://scenes/lobby_scene.tscn")
+
 		# Creates signal for clients connecting
 		multiplayer.peer_connected.connect(_on_peer_connected)
+
+		multiplayer.peer_disconnected.disconnect(_on_peer_disconnected)
 
 		multiplayer.multiplayer_peer = peer
 
 
 func _on_peer_connected(id: int) -> void:
+	var player = Player.new(id)
+	RootScene.instance.lobby_manager.add_player(player)
 	print("Client connected: ", id)
 
 
-func _on_connected_to_server() -> void:
+func _on_peer_disconnected(_id: int) -> void:
 	pass

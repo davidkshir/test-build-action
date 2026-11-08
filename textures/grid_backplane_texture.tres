@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dfpx1kaxw005g"]
+
+[ext_resource type="Shader" uid="uid://dr1ugxl632are" path="res://shaders/barrier_grid.gdshader" id="1_fvvsw"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_fvvsw")
+shader_parameter/grid_size = 0.05
+shader_parameter/line_color = Color(0.21176471, 0.34509805, 0.5372549, 1)
+shader_parameter/line_thickness = 0.05
+shader_parameter/shimmer_period = 20.0
+shader_parameter/shimmer_speed = 1.0
+shader_parameter/shimmer_width = 1.0

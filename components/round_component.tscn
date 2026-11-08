@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bdsc4s68pmpac"]
+
+[ext_resource type="Script" uid="uid://bbytqrju416nh" path="res://components/round_component.gd" id="1_bjoij"]
+
+[node name="RoundComponent" type="Node" unique_id=94217729]
+script = ExtResource("1_bjoij")
