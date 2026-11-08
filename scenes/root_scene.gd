@@ -1,19 +1,17 @@
 class_name RootScene
 extends Node
 
-@onready var content_scene: Node = %ContentScene
-
-@onready var game_results_manager: GameResultsManager = %GameResultsManager
-
-@onready var lobby_manager: LobbyManager = %LobbyManager
-
-@onready var network_manager: NetworkManager = %NetworkManager
-
 static var instance: RootScene:
 	get:
 		var scene_tree = Engine.get_main_loop() as SceneTree
 
 		return scene_tree.current_scene
+
+@onready var content_scene: Node = %ContentScene
+
+@onready var lobby_manager: LobbyManager = %LobbyManager
+
+@onready var network_manager: NetworkManager = %NetworkManager
 
 
 func _ready() -> void:

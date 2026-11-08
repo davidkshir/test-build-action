@@ -2,11 +2,16 @@
 
 [ext_resource type="Script" uid="uid://i01uqttntwc2" path="res://nodes/paddle.gd" id="1_c6p2f"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kqrp3"]
+shading_mode = 0
+albedo_color = Color(0.3235835, 0.24607712, 0.1381824, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_0w2e0"]
-size = Vector3(0.5, 0.5, 0.1)
+material = SubResource("StandardMaterial3D_kqrp3")
+size = Vector3(1, 0.75, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0w2e0"]
-size = Vector3(0.5, 0.5, 0.1)
+size = Vector3(1, 0.75, 0.1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ccmf2"]
 properties/0/path = NodePath(".:position")

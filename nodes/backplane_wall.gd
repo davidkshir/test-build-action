@@ -1,16 +1,12 @@
 @tool
 class_name BackplaneWall
-extends Node3D
+extends StaticBody3D
 
 signal ball_hit(wall: BackplaneWall)
 
 @export var opposing_wall: BackplaneWall
 
 @export var target_node: Node3D
-
-@onready var mesh_instance_3d: MeshInstance3D = %MeshInstance3D
-
-var _player: Player = null
 
 var player: Player:
 	get:
@@ -21,9 +17,9 @@ var player: Player:
 
 		_player_changed(old_player, value)
 
+var _player: Player = null
 
-func _player_changed(_old_player: Player, _new_player: Player) -> void:
-	pass
+@onready var mesh_instance_3d: MeshInstance3D = %MeshInstance3D
 
 
 func _process(_delta: float) -> void:
@@ -50,12 +46,15 @@ func _process(_delta: float) -> void:
 	shader_material.set_shader_parameter("mask_origin", closest_point)
 
 
+func _player_changed(_old_player: Player, _new_player: Player) -> void:
+	pass
+
+
 func _on_collision_area_body_entered(body: Node3D) -> void:
 	if not multiplayer.is_server():
 		return
 
-	# Filter for ball (can change for more specific condition when ball is created)
-	if body is not RigidBody3D:
+	if body is not Ball:
 		return
 
 	if opposing_wall == null:
@@ -74,6 +73,5 @@ func _on_collision_area_body_entered(body: Node3D) -> void:
 		return
 
 	losing_player.health.health -= 1
-	scoring_player.score.score += 1
 
 	ball_hit.emit(self)

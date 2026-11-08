@@ -11,6 +11,11 @@ uniform vec3 mask_origin = vec3(0.0);
 uniform float mask_radius = 1.0;
 uniform float mask_feather = 0.5;
 
+group_uniforms Fringing;
+uniform float fringe_strength : hint_range(0.0, 0.2) = 0.03;
+uniform float fringe_frequency = 15.0;
+uniform float fringe_speed = 3.0;
+
 varying vec3 local_position;
 varying vec3 local_normal;
 
@@ -31,8 +36,10 @@ void fragment() {
 
 	float is_line = 1.0 - min(lines.x, lines.y);
 
-	float dist = distance(local_position, mask_origin);
-	float mask = 1.0 - smoothstep(mask_radius - mask_feather, mask_radius, dist);
+	float fringe = sin(dot(local_position, vec3(12.0, 14.0, 12.0)) + TIME * fringe_speed) * fringe_strength;
+	float fringe_distance = distance(local_position, mask_origin) + fringe;
+
+	float mask = 1.0 - smoothstep(mask_radius - mask_feather, mask_radius, fringe_distance);
 
 	ALBEDO = line_color.rgb;
 	ALPHA = is_line * mask * line_color.a;

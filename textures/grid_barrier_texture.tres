@@ -5,9 +5,11 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_t1yer")
-shader_parameter/grid_size = 0.05
+shader_parameter/grid_size = 0.1
 shader_parameter/line_color = Color(0.21176471, 0.34509805, 0.5372549, 1)
-shader_parameter/line_thickness = 0.05
-shader_parameter/shimmer_period = 20.0
-shader_parameter/shimmer_speed = 1.0
-shader_parameter/shimmer_width = 1.0
+shader_parameter/line_thickness = 0.0250000011875
+shader_parameter/shimmer_origin = Vector3(0.015, 0, 0)
+shader_parameter/shimmer_width = 0.5
+shader_parameter/fringe_strength = 0.03
+shader_parameter/fringe_frequency = 15.0
+shader_parameter/fringe_speed = 3.0

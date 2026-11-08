@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://byh64l7ovxsdy"]
+
+[ext_resource type="Script" uid="uid://devhsmfys4aj4" path="res://scenes/center_container.gd" id="1_u7scg"]
+[ext_resource type="FontFile" uid="uid://ddexdukijnwvp" path="res://addons/font/IBMPlexMono-Medium.ttf" id="2_jmo4e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skdbl"]
+bg_color = Color(0.03137255, 0.078431375, 0.14901961, 0.8)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 1, 1, 0.4)
+shadow_size = 12
+
+[node name="LobbyUI" type="Control" unique_id=534611682]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=196192364]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=406145305]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u7scg")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/CenterContainer" unique_id=1582401864]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_skdbl")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CenterContainer/PanelContainer" unique_id=21924786]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/PanelContainer/MarginContainer" unique_id=1622625309]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1815857092]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jmo4e")
+theme_override_font_sizes/font_size = 32
+text = "Pong For Two"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=140226404]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jmo4e")
+text = "Start"
+
+[node name="Button2" type="Button" parent="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=79094022]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jmo4e")
+text = "Quit"
+
+[connection signal="pressed" from="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Button" to="CanvasLayer/CenterContainer" method="_on_start_pressed"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Button2" to="CanvasLayer/CenterContainer" method="_on_quit_pressed"]

@@ -65,6 +65,9 @@ func send_input_delta(tracking_delta: Vector2) -> void:
 	if not multiplayer.is_server():
 		return
 
+	var caller_id = multiplayer.get_remote_sender_id()
+	var player = RootScene.instance.lobby_manager.get_player_from_id(caller_id)
+
 	player.tracking_delta.tracking_delta = tracking_delta
 
 

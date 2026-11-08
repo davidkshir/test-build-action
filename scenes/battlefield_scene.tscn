@@ -2,13 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://bebnnfqhcd4c5" path="res://nodes/game_manager.tscn" id="1_uok7p"]
 [ext_resource type="PackedScene" uid="uid://cads8xbmmbnom" path="res://nodes/battlefield.tscn" id="2_v0ej5"]
-[ext_resource type="PackedScene" uid="uid://dngasovthuntg" path="res://nodes/ball.tscn" id="3_x1h1f"]
 
 [node name="BattlefieldScene" type="Node3D" unique_id=1395957463]
 
 [node name="GameManager" parent="." unique_id=2053409803 instance=ExtResource("1_uok7p")]
 
 [node name="Battlefield" parent="." unique_id=1339524449 instance=ExtResource("2_v0ej5")]
-
-[node name="Ball" parent="." unique_id=1192235307 instance=ExtResource("3_x1h1f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9674157, 0)

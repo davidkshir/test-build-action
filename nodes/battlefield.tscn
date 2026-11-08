@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bwccubv3gw3wo" path="res://nodes/battlefield.gd" id="1_ir3qr"]
 [ext_resource type="PackedScene" uid="uid://churypx3uhfns" path="res://nodes/barrier_walls.tscn" id="1_uiimn"]
 [ext_resource type="PackedScene" uid="uid://c4qgf3rrtvfpe" path="res://nodes/paddle.tscn" id="2_2qtdm"]
+[ext_resource type="PackedScene" uid="uid://dngasovthuntg" path="res://nodes/ball.tscn" id="5_hxody"]
 
 [sub_resource type="Environment" id="Environment_vnuii"]
 background_mode = 1
@@ -18,7 +19,8 @@ script = ExtResource("1_ir3qr")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=732189698]
 environment = SubResource("Environment_vnuii")
 
-[node name="BarrierWalls" parent="." unique_id=1701708914 instance=ExtResource("1_uiimn")]
+[node name="BarrierWalls" parent="." unique_id=1701708914 node_paths=PackedStringArray("target_node") instance=ExtResource("1_uiimn")]
+target_node = NodePath("../Ball")
 
 [node name="Paddle1" parent="." unique_id=9845050 instance=ExtResource("2_2qtdm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.95)
@@ -35,3 +37,6 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.015)
 opposing_wall = NodePath("../BackplaneWall1")
 target_node = NodePath("../Paddle2")
+
+[node name="Ball" parent="." unique_id=628200670 instance=ExtResource("5_hxody")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

@@ -1,11 +1,11 @@
 class_name LobbyManager
 extends Node
 
-const PLAYER_SCENE = preload("res://nodes/player.tscn")
-
 signal player_added(player: Player)
 
 signal player_removed(player: Player)
+
+const PLAYER_SCENE = preload("res://nodes/player.tscn")
 
 var players: Array[Player]:
 	get:
@@ -16,10 +16,6 @@ var players: Array[Player]:
 				list.append(child)
 
 		return list
-
-
-func _format_player_node_name(id: int) -> String:
-	return "Player%s" % id
 
 
 func add_player(id: int) -> Player:
@@ -63,3 +59,7 @@ func remove_player(id: int) -> void:
 
 	player_removed.emit(player)
 	player.queue_free()
+
+
+func _format_player_node_name(id: int) -> String:
+	return "Player%s" % id

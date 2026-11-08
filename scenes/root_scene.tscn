@@ -2,14 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bnk1qiptdie4p" path="res://scenes/root_scene.gd" id="1_kc8py"]
 [ext_resource type="PackedScene" uid="uid://ci6v31ea5cbgw" path="res://nodes/lobby_manager.tscn" id="2_cgud6"]
-[ext_resource type="PackedScene" uid="uid://c4scolwcvubfd" path="res://nodes/game_results_manager.tscn" id="2_docf2"]
 [ext_resource type="PackedScene" uid="uid://dlbdligy2tsss" path="res://nodes/network_manager.tscn" id="3_sfakk"]
 
 [node name="RootScene" type="Node" unique_id=1614111639]
 script = ExtResource("1_kc8py")
-
-[node name="GameResultsManager" parent="." unique_id=1722273646 instance=ExtResource("2_docf2")]
-unique_name_in_owner = true
 
 [node name="LobbyManager" parent="." unique_id=55853016 instance=ExtResource("2_cgud6")]
 unique_name_in_owner = true
